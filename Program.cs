@@ -30,7 +30,7 @@ namespace MetalDocsToAnki
 
         static IEnumerable<HtmlNode> Sections(HtmlDocument doc)
         {
-            var sections = doc.DocumentNode.SelectNodes("//body/div[@id='app']/div/main/section[@id='topics']/div/div/section");
+            var sections = doc.DocumentNode.SelectNodes("html/body/div[@id='app']/div/main/section[@id='topics']/div/div/section");
             if (sections == null)
             {
                 yield break;
