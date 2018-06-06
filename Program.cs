@@ -13,11 +13,6 @@ namespace MetalDocsToAnki
 {
     class Program
     {
-        static string Minify(string htmlInput)
-        {
-            return new HtmlContentCompressor().Compress(htmlInput);
-        }
-
         static string UrlToTempDownloadPath(string url)
         {
             return System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), "temp", new Uri(url).AbsolutePath.Substring(1));
@@ -26,34 +21,6 @@ namespace MetalDocsToAnki
         static string UrlToLocalPath(string url)
         {
             return System.IO.Path.Combine(System.IO.Directory.GetCurrentDirectory(), new Uri(url).AbsolutePath.Substring(1));
-        }
-
-        static IEnumerable<HtmlNode> Sections(HtmlDocument doc)
-        {
-            var sections = doc.DocumentNode.SelectNodes("html/body/div[@id='app']/div/main/section[@id='topics']/div/div/section");
-            if (sections == null)
-            {
-                yield break;
-            }
-
-            foreach (var section in sections)
-            {
-                yield return section;
-            }
-        }
-
-        static IEnumerable<HtmlNode> Topics(HtmlNode section)
-        {
-            var topics = section.SelectNodes("div/div[@class='contenttable-section-content column large-9 medium-9 small-12']/div[@class='task-topics']/div");
-            if (topics == null)
-            {
-                yield break;
-            }
-
-            foreach (var topic in topics)
-            {
-                yield return topic;
-            }
         }
 
         static System.IO.FileInfo DownloadPage(HtmlWeb web, string url, HashSet<string> visitedURLs)
@@ -96,9 +63,11 @@ namespace MetalDocsToAnki
                 }
             }
 
-            foreach (var section in Sections(doc))
+            var sections = doc.DocumentNode.SelectNodes("//body/div[@id='app']/div/main/section[@id='topics']/div/div/section");
+            foreach (var section in sections)
             {
-                foreach (var topic in Topics(section))
+                var topics = section.SelectNodes("div/div[@class='contenttable-section-content column large-9 medium-9 small-12']/div[@class='task-topics']/div");
+                foreach (var topic in topics)
                 {
                     var anchor = topic.SelectSingleNode("div/a");
                     var href = anchor.GetAttributeValue("href", null);
@@ -174,9 +143,11 @@ namespace MetalDocsToAnki
                 ankiCsvEntries.Add("");
             }
 
-            foreach (var section in Sections(doc))
+            var sections = doc.DocumentNode.SelectNodes("//body/div[@id='app']/div/main/section[@id='topics']/div/div/section");
+            foreach (var section in sections)
             {
-                foreach (var topic in Topics(section))
+                var topics = section.SelectNodes("div/div[@class='contenttable-section-content column large-9 medium-9 small-12']/div[@class='task-topics']/div");
+                foreach (var topic in topics)
                 {
                     var anchor = topic.SelectSingleNode("div/a");
                     var href = anchor.GetAttributeValue("href", null);
@@ -226,7 +197,7 @@ namespace MetalDocsToAnki
                     throw new Exception("tab is not a good enough CSV separator!");
                 }
 
-                docAsString = Minify(docAsString);
+                docAsString = new HtmlContentCompressor().Compress(docAsString);
                 docAsString = new System.Text.RegularExpressions.Regex("\r?\n").Replace(docAsString, "<br>");
 
                 var topicHeading = doc.DocumentNode.SelectSingleNode("html/body/div[@id='app']/div/main/div[@class='topic-title']/h1[@class='topic-heading']").InnerText;
