@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.26730.16
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetalDocsToAnki", "MetalDocsToAnki.csproj", "{02577613-DE0D-4673-BD8D-B24636C13F28}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{02577613-DE0D-4673-BD8D-B24636C13F28}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02577613-DE0D-4673-BD8D-B24636C13F28}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02577613-DE0D-4673-BD8D-B24636C13F28}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02577613-DE0D-4673-BD8D-B24636C13F28}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B62F148F-E4D8-4539-9A6B-B907678E3098}
+	EndGlobalSection
+EndGlobal
