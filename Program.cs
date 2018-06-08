@@ -63,7 +63,7 @@ namespace MetalDocsToAnki
                 }
             }
 
-            var sections = doc.DocumentNode.SelectNodes("//body/div[@id='app']/div/main/section[@id='topics']/div/div/section");
+            var sections = doc.DocumentNode.SelectNodes("html/body/div[@id='app']/div/main/section[@id='topics']/div/div/section");
             foreach (var section in sections)
             {
                 var topics = section.SelectNodes("div/div[@class='contenttable-section-content column large-9 medium-9 small-12']/div[@class='task-topics']/div");
@@ -143,7 +143,7 @@ namespace MetalDocsToAnki
                 ankiCsvEntries.Add("");
             }
 
-            var sections = doc.DocumentNode.SelectNodes("//body/div[@id='app']/div/main/section[@id='topics']/div/div/section");
+            var sections = doc.DocumentNode.SelectNodes("html/body/div[@id='app']/div/main/section[@id='topics']/div/div/section");
             foreach (var section in sections)
             {
                 var topics = section.SelectNodes("div/div[@class='contenttable-section-content column large-9 medium-9 small-12']/div[@class='task-topics']/div");
